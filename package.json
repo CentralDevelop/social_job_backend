@@ -25,6 +25,7 @@
     "passport": "^0.4.1"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "standard": "^14.3.4"
   }
