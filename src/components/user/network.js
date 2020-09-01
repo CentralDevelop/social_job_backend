@@ -37,4 +37,14 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.put('/', async (req, res) => {
+  const user = { _id, fullname, email, username, password } = req.body
+  try {
+    const data = await controller.updateUser(user)
+    response.success(req, res, data, 200)
+  } catch (error) {
+    response.error(req, res, error.message, 400, error)
+  }
+})
+
 module.exports = router

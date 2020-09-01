@@ -19,8 +19,15 @@ const getAllUsers = () => {
   return Model.find({})
 }
 
+const updateUser = async (filter, update) => {
+  return await Model.findOneAndUpdate(filter, update, {
+    returnOriginal: false
+  })
+}
+
 module.exports = {
   add: addUser,
   getOneUser,
-  getAllUsers
+  getAllUsers,
+  updateUser
 }
