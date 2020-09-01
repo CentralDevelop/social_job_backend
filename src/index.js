@@ -3,6 +3,10 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const router = require('./api/routes')
+const db = require('./storage/index')
+
+//  Initializing DB conn
+db();
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)

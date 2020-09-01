@@ -1,3 +1,3 @@
-const Model = require("../storage/user")
+const Model = require('../storage/user')
 
-//Your code 
+// Your code
