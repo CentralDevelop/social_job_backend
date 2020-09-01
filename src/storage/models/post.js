@@ -10,7 +10,7 @@ const mySchema = new Schema({
     description:String,
     company:String,
     url:String,
-    skill:String
+    skill:String,
     rate:Int32Array,
     user: {
         type:Schema.ObjectID,
