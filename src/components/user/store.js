@@ -1,16 +1,21 @@
 const Model = require('../../storage/models/user')
 
 const addUser = (user) => {
-    const myUser = new Model(user)
-    return myUser.save()
+  const myUser = new Model(user)
+  return myUser.save()
 }
 
-const allUsers = async () => {
-    return Model.find();    
-}
+const getOneUser = async (id) => {
+  const data = await Model.findById(id).exec()
 
+  if (data) {
+    return data
+  } else {
+    throw new Error('User not found')
+  }
+}
 
 module.exports = {
-    add: addUser,
-    listAllUsers: allUsers
+  add: addUser,
+  getOneUser
 }
