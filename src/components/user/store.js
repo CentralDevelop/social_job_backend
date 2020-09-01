@@ -15,7 +15,12 @@ const getOneUser = async (id) => {
   }
 }
 
+const getAllUsers = () => {
+  return Model.find({})
+}
+
 module.exports = {
   add: addUser,
-  getOneUser
+  getOneUser,
+  getAllUsers
 }

@@ -22,7 +22,12 @@ const getOne = async (id) => {
   }
 }
 
+const getAll = () => {
+  return storage.getAllUsers()
+}
+
 module.exports = {
   add: addUser,
-  getOne
+  getOne,
+  getAll
 }
