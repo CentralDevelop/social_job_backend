@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 router(app)
 
 //statics
-app.use('/app', express.static('public'))
+app.use('/app', express.static('src/public'))
 
 //  Starting server
 app.listen(app.get('port'), () => {
