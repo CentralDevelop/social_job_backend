@@ -3,6 +3,9 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const router = require('./api/routes')
+const db = require("./storage/index")
+
+db("mongodb+srv://omargnzlz645:resina96@cluster0.biyni.mongodb.net/social_job?retryWrites=true&w=majority")
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)
