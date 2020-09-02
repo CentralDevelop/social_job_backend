@@ -27,7 +27,7 @@ router.post('/signup', async (req, res) => {
   const { fullname, email, username, password } = req.body
   try {
     const user = await controller.add(fullname, email, username, password)
-    response.success(req, res, `User created: ${user}`, 201)
+    response.success(req, res, user, 201)
   } catch (error) {
     response.error(req, res, error.message, 400, error)
   }
@@ -48,13 +48,12 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
   try {
-    const data = await controller.deleteUserController(id)
+    await controller.deleteUserController(id)
 
     response.success(req, res, `User ${id} deleted`, 200)
   } catch (err) {
     response.error(req, res, err.message, 500, err)
   }
 })
-
 
 module.exports = router

@@ -3,9 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const router = require('./api/routes')
-const db = require("./storage/index")
-
-
+const db = require('./storage/index')
 
 db()
 
@@ -18,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 //  Routes
 router(app)
 
-//statics
+// statics
 app.use('/app', express.static('src/public'))
 
 //  Starting server

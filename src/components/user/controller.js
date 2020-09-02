@@ -1,4 +1,5 @@
 const storage = require('./store')
+const bcrypt = require('bcrypt')
 
 const addUser = async (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {
@@ -9,20 +10,24 @@ const addUser = async (fullname, email, username, password) => {
   if (emailExists.length >= 1) {
     throw new Error('Email used')
   } else {
-    await bcrypt.hash(password, 10, async (err, hashed) => {
-      if (err) {
-        throw err
-      } else {
-
-        const user = {
-          fullname,
-          email,
-          username,
-          password: hashed
+    const hashedPassword = await new Promise((resolve, reject) => {
+      bcrypt.hash(password, 10, async (err, hashed) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(hashed)
         }
-        return storage.add(user)
-      }
+      })
     })
+
+    const user = {
+      fullname,
+      email,
+      username,
+      password: hashedPassword
+    }
+
+    return storage.add(user)
   }
 }
 
@@ -56,16 +61,15 @@ const updateUser = async (userUpdate) => {
 }
 
 const deleteUserController = async (id) => {
-  if(id) {
-    let filter = {
+  if (id) {
+    const filter = {
       _id: id
     }
     return await storage.deleteUser(filter)
-
   } else {
     throw new Error('Id needed')
   }
-} 
+}
 module.exports = {
   add: addUser,
   getOne,

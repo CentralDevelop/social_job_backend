@@ -1,13 +1,19 @@
 const Model = require('../../storage/models/user')
 
-const addUser = (user) => {
+const addUser = async (user) => {
   const myUser = new Model(user)
-  return myUser.save()
+  try {
+    return await myUser.save()
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 const getOneByFilter = async (filter) => {
   const data = await Model.find(filter)
+  return data
 }
+
 const getOneUser = async (id) => {
   const data = await Model.findById(id).exec()
 
@@ -29,13 +35,9 @@ const updateUser = async (filter, update) => {
 }
 
 const deleteUser = async (id) => {
-  try {
-    const data = await Model.findByIdAndRemove(id)
-    if (!data) {
-      throw new Error('User not found')
-    }
-  } catch (error) {
-    throw error
+  const data = await Model.findByIdAndRemove(id)
+  if (!data) {
+    throw new Error('User not found')
   }
 }
 
