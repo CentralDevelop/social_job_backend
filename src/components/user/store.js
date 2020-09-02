@@ -5,6 +5,9 @@ const addUser = (user) => {
   return myUser.save()
 }
 
+const getOneByFilter = async (filter) => {
+  const data = await Model.find(filter)
+}
 const getOneUser = async (id) => {
   const data = await Model.findById(id).exec()
 
@@ -41,5 +44,6 @@ module.exports = {
   getOneUser,
   getAllUsers,
   updateUser,
-  deleteUser
+  deleteUser,
+  getOneByFilter
 }

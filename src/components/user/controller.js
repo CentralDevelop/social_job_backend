@@ -1,16 +1,29 @@
 const storage = require('./store')
 
-const addUser = (fullname, email, username, password) => {
+const addUser = async (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {
     throw new Error('Missing data')
   }
-  const user = {
-    fullname,
-    email,
-    username,
-    password
+  const emailExists = await storage.getOneByFilter({ email })
+
+  if (emailExists.length >= 1) {
+    throw new Error('Email used')
+  } else {
+    await bcrypt.hash(password, 10, async (err, hashed) => {
+      if (err) {
+        throw err
+      } else {
+
+        const user = {
+          fullname,
+          email,
+          username,
+          password: hashed
+        }
+        return storage.add(user)
+      }
+    })
   }
-  return storage.add(user)
 }
 
 const getOne = async (id) => {
