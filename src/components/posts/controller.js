@@ -9,7 +9,7 @@ const getPost = () => {
 
 
 
-const addPost = (title, salary, rating, description, company, url, skill, rate, user, location, file) => {
+const addPost = (title, salary, rating, description, company, url, skill, rate, user, location, image) => {
     return new Promise((resolve, reject) => {
         if (!title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !location) {
             console.log("[CONTROLLER] invalid data form")
@@ -17,13 +17,13 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
           }
 
           let fileUrl = ""
-          if (file){
-              fileUrl = `http://localhost:4000/public/files/${file.filename}`
+          if (image){
+              fileUrl = `http://localhost:4000/app/files/${image.filename}`
           }
 
         const post = {
             title,
-            file: fileUrl,
+            image: fileUrl,
             salary,
             rating,
             description,

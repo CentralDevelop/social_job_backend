@@ -10,11 +10,14 @@ db("mongodb+srv://omargnzlz645:resina96@cluster0.biyni.mongodb.net/social_job?re
 //  Server Config
 app.set('port', process.env.PORT || 4000)
 app.use(morgan('dev'))
-app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 //  Routes
 router(app)
+
+//statics
+app.use('/app', express.static('public'))
 
 //  Starting server
 app.listen(app.get('port'), () => {

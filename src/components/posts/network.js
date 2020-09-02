@@ -7,8 +7,7 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     destination: 'public/files',
     filename : function (req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now() + 
-        path.extname(file.originalname))
+        cb(null, file.fieldname + "-" + Date.now())
     }
 })
 
@@ -25,7 +24,7 @@ router.get('/', (req, res) => {
         })
 })
 
-router.post('/', upload.single('file') ,(req, res) => {
+router.post('/', upload.single('image') ,(req, res) => {
     const { title, salary, rating, description, company, url, skill, rate, user, location } = req.body
     controller.addPost(title, salary, rating, description, company, url, skill, rate, user, location, req.file)
         .then(data => {
