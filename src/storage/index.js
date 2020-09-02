@@ -6,7 +6,8 @@ const connect = async (url) => {
   try {
     await db.connect(url, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      useFindAndModify: false
     })
     console.log('[DB] Conecction success')
   } catch (error) {
