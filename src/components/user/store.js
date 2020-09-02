@@ -25,9 +25,21 @@ const updateUser = async (filter, update) => {
   })
 }
 
+const deleteUser = async (id) => {
+  try {
+    const data = await Model.findByIdAndRemove(id)
+    if (!data) {
+      throw new Error('User not found')
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   add: addUser,
   getOneUser,
   getAllUsers,
-  updateUser
+  updateUser,
+  deleteUser
 }

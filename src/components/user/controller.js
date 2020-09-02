@@ -27,24 +27,36 @@ const getAll = () => {
 }
 
 const updateUser = async (userUpdate) => {
-    if(userUpdate) {
-        let filter = {
-            _id: userUpdate._id
-        }
-        const userUpdated = await storage.updateUser(filter, userUpdate)
-        if (userUpdated) {
-            return userUpdated
-        } else {
-            throw new Error('User not found')
-        } 
-    } else {
-        throw new Error('Fatal error')
+  if (userUpdate) {
+    const filter = {
+      _id: userUpdate._id
     }
+    const userUpdated = await storage.updateUser(filter, userUpdate)
+    if (userUpdated) {
+      return userUpdated
+    } else {
+      throw new Error('User not found')
+    }
+  } else {
+    throw new Error('Fatal error')
+  }
 }
 
+const deleteUserController = async (id) => {
+  if(id) {
+    let filter = {
+      _id: id
+    }
+    return await storage.deleteUser(filter)
+
+  } else {
+    throw new Error('Id needed')
+  }
+} 
 module.exports = {
   add: addUser,
   getOne,
   getAll,
-  updateUser
+  updateUser,
+  deleteUserController
 }

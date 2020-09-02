@@ -27,18 +27,17 @@ router.post('/', async (req, res) => {
   const { fullname, email, username, password } = req.body
   try {
     const data = await controller.add(fullname, email, username, password)
-    const finalResponse = {
-      data: data,
-      message: 'User created successfully'
-    }
-    response.success(req, res, finalResponse, 201)
+
+    response.success(req, res, data, 201)
   } catch (error) {
     response.error(req, res, error.message, 400, error)
   }
 })
 
-router.put('/', async (req, res) => {
-  const user = { _id, fullname, email, username, password } = req.body
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const { body: user } = req
+  user._id = id
   try {
     const data = await controller.updateUser(user)
     response.success(req, res, data, 200)
@@ -46,5 +45,17 @@ router.put('/', async (req, res) => {
     response.error(req, res, error.message, 400, error)
   }
 })
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  try {
+    const data = await controller.deleteUserController(id)
+
+    response.success(req, res, `User ${id} deleted`, 200)
+  } catch (err) {
+    response.error(req, res, err.message, 500, err)
+  }
+})
+
 
 module.exports = router
