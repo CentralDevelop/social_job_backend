@@ -5,18 +5,19 @@ const Schema = mongoose.Schema
 const mySchema = new Schema({
   title: String,
   image: String, // no sure
-  salary: Int32Array,
-  rating: Int32Array,
+  salary: Number,
+  rating: Number,
   description: String,
   company: String,
   url: String,
   skills: [{
     type: String
   }],
-  rate: Int32Array,
+  rate: Number,
   user: {
-    type: Schema.ObjectID,
-    ref: 'User'
+    // type: Schema.ObjectID,
+    // ref: 'User'
+    type: String
   },
   location: {
     country: String,
