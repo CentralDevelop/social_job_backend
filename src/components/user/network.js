@@ -26,8 +26,8 @@ router.get('/:id', async (req, res) => {
 router.post('/signup', async (req, res) => {
   const { fullname, email, username, password } = req.body
   try {
-    await controller.add(fullname, email, username, password)
-    response.success(req, res, 'User created', 201)
+    const user = await controller.add(fullname, email, username, password)
+    response.success(req, res, `User created: ${user}`, 201)
   } catch (error) {
     response.error(req, res, error.message, 400, error)
   }
