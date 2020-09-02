@@ -15,11 +15,6 @@ const getOneUser = async (id) => {
   }
 }
 
-const getOneByFilter = async (filter) => {
-  const data = await Model.find(filter)
-  return data
-}
-
 const getAllUsers = () => {
   return Model.find({})
 }
@@ -46,6 +41,5 @@ module.exports = {
   getOneUser,
   getAllUsers,
   updateUser,
-  deleteUser,
-  getOneByFilter
+  deleteUser
 }
