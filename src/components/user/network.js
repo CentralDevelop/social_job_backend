@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.post('/signup', async (req, res) => {
+router.post('/', async (req, res) => {
   const { fullname, email, username, password } = req.body
   try {
     const user = await controller.add(fullname, email, username, password)
