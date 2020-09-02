@@ -1,15 +1,29 @@
 const store = require("./store")
 
 
-const addPost = (title, image, salary, rating, description, company, url, skill, rate, user, location) => {
+const getPost = () => {
+    return new Promise ((resolve, reject) => {
+        resolve(store.get())
+    })
+}
+
+
+
+const addPost = (title, salary, rating, description, company, url, skill, rate, user, location, file) => {
     return new Promise((resolve, reject) => {
-        if (!title || !image || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !location) {
+        if (!title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !location) {
             console.log("[CONTROLLER] invalid data form")
             reject('Missing data')
           }
+
+          let fileUrl = ""
+          if (file){
+              fileUrl = `http://localhost:4000/public/files/${file.filename}`
+          }
+
         const post = {
             title,
-            image,
+            file: fileUrl,
             salary,
             rating,
             description,
@@ -33,4 +47,5 @@ const addPost = (title, image, salary, rating, description, company, url, skill,
 
 module.exports = {
     addPost,
+    getPost,
 }
