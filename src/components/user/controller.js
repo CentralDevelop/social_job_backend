@@ -1,30 +1,16 @@
 const storage = require('./store')
-const bcrypt = require('bcrypt')
 
-const addUser = async (fullname, email, username, password) => {
+const addUser = (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {
     throw new Error('Missing data')
   }
-  const emailExists = await storage.getOneByFilter({ email })
-
-  if (emailExists.length >= 1) {
-    throw new Error('Email used')
-  } else {
-    await bcrypt.hash(password, 10, async (err, hashed) => {
-      if (err) {
-        throw err
-      } else {
-
-        const user = {
-          fullname,
-          email,
-          username,
-          password: hashed
-        }
-        return storage.add(user)
-      }
-    })
+  const user = {
+    fullname,
+    email,
+    username,
+    password
   }
+  return storage.add(user)
 }
 
 const getOne = async (id) => {
@@ -57,7 +43,7 @@ const updateUser = async (userUpdate) => {
 }
 
 const deleteUserController = async (id) => {
-  if (id) {
+  if(id) {
     let filter = {
       _id: id
     }
@@ -66,7 +52,7 @@ const deleteUserController = async (id) => {
   } else {
     throw new Error('Id needed')
   }
-}
+} 
 module.exports = {
   add: addUser,
   getOne,
