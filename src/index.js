@@ -5,7 +5,7 @@ const app = express()
 const router = require('./api/routes')
 const db = require("./storage/index")
 
-db("")
+db()
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)
