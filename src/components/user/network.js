@@ -36,10 +36,14 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res, next) => {
   const { email, password } = req.body
   try {
-    const validation = await controller.loginController(email, password)
-    console.log(validation)
-    if (validation === true) {
-      response.success(req, res, 'Login successfully', 200)
+    const token = await controller.loginController(email, password)
+    console.log(token)
+    let finalResponse = {
+      Message: "Auth success",
+      token,
+    }
+    if (token) {
+      response.success(req, res, finalResponse, 200)
     } else {
       throw new Error('Login failed')
     }

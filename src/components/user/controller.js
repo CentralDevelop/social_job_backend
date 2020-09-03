@@ -1,5 +1,6 @@
 const storage = require('./store')
 const bcrypt = require('bcrypt')
+const auth = require('../../auth/index')
 
 const addUser = async (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {
@@ -38,7 +39,10 @@ const loginController = async (email, password) => {
     throw new Error('Login failed')
   }
   const isCorrect = bcrypt.compareSync(password, user[0].password)
-  return isCorrect
+  if (isCorrect === true) {
+    const token = auth.createToken(user[0].email, user[0].username)
+    return token
+  }
 }
 
 const getOne = async (id) => {
