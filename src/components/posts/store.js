@@ -16,33 +16,33 @@ const add = (post) => {
     newPost.save()
 }
 
-const update = async (id, title, salary, rating, description, company, url, skill, rate, user, country, city) => {
+const update = async (id, post) => {
     let retrievedPost = await model.findOne({
         _id: id
     })
 
+    let entrie = Object.entries(retrievedPost)
+    entrie = Object.entries(post)
+
+    
+    retrievedPost = Object.fromEntries(entrie)
+
     console.log(retrievedPost)
-
-    retrievedPost = {
-        title: title,
-        salary: salary,
-        rating: rating,
-        description: description,
-        company: company,
-        url: url,
-        skill: skill,
-        rate: rate,
-        user: user,
-        country: country,
-        city: city
-    }
-
-    let updatedPost = await retrievedPost.save()
-    return updatedPost
+    const newdPost = await model.findByIdAndUpdate(id, retrievedPost)
+    return newdPost
 }
+
+const remove = (id) => {
+    return model.deleteOne({
+        _id: id
+    })
+}
+
+
 
 module.exports = {
     add,
     get,
-    update
+    update,
+    remove,
 }

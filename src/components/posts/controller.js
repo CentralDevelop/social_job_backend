@@ -45,13 +45,13 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
     })
 }
 
-const updatePost = async (id, title, salary, rating, description, company, url, skill, rate, user, country, city) => {
-    return new Promise((resolve, reject) => {
-        if ( !id || !title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city) {
-            console.log("[CONTROLLER] invalid data form")
-            reject('Missing data')
-          }
 
+const updatePost = (id, title, salary, rating, description, company, url, skill, rate, user, country, city) => {
+    return new Promise((resolve, reject) => {
+
+        if(!id || !title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city ){
+            reject("Missing data")
+        }
 
         const post = {
             title,
@@ -67,15 +67,33 @@ const updatePost = async (id, title, salary, rating, description, company, url, 
             country,
             city
           }
-          
 
 
-          resolve(store.update(id, post))
+        const result = store.update(id, post)
+        resolve(result)
+    })
+}
+
+
+const deletePost = (id) => {
+    return new Promise ((resolve, reject) => {
+        if(!id) {
+            reject("Missing data")
+        }
+
+        store.remove(id)
+            .then(() => {
+                resolve("Post deleted")
+            })
+            .catch(error => {
+                reject(error)
+            })
     })
 }
 
 module.exports = {
     addPost,
     getAllPost,
-    updatePost
+    updatePost,
+    deletePost
 }
