@@ -33,6 +33,22 @@ router.post('/signup', async (req, res) => {
   }
 })
 
+router.post('/login', async (req, res, next) => {
+  const { email, password } = req.body
+  try {
+    const validation = await controller.loginController(email, password)
+    console.log(validation)
+    if (validation === true) {
+      response.success(req, res, 'Login successfully', 200)
+    } else {
+      throw new Error('Login failed')
+    }
+  } catch (error) {
+    console.log(error.message)
+    response.error(req, res, error.message, 401, error)
+  }
+})
+
 router.put('/:id', async (req, res) => {
   const { id } = req.params
   const { body: user } = req
