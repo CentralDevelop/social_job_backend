@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const controller = require('./controller')
 const response = require('../../network/response')
+const checkAuth = require('../../api/middleware/check-auth')
+
 
 router.get('/', async (req, res) => {
   try {
@@ -53,7 +55,7 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', checkAuth, async (req, res) => {
   const { id } = req.params
   const { body: user } = req
   user._id = id
