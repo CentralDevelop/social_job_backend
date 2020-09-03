@@ -19,10 +19,11 @@ const mySchema = new Schema({
     // ref: 'User'
     type: String
   },
-  location: {
+  country:String,
+  city:String /* {
     country: String,
     city: String
-  }
+  } */
 
 })
 

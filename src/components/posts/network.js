@@ -14,25 +14,39 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 router.get('/', (req, res) => {
-
-    controller.getPost()
-        .then(data => {
-            response.success(req, res, data, 200)
-        })
-        .catch(error => {
-            response.success(req, res, error.message, 400, error)
-        })
-})
-
-router.post('/', upload.single('image') ,(req, res) => {
-    const { title, salary, rating, description, company, url, skill, rate, user, location } = req.body
-    controller.addPost(title, salary, rating, description, company, url, skill, rate, user, location, req.file)
+    
+    controller.getAllPost()
         .then(data => {
             response.success(req, res, data, 200)
         })
         .catch(error => {
             response.error(req, res, error.message, 400, error)
         })
+})
+
+
+router.post('/', upload.single('image') ,(req, res) => {
+    const { title, salary, rating, description, company, url, skill, rate, user, country, city } = req.body
+    controller.addPost(title, salary, rating, description, company, url, skill, rate, user, country, city, req.file)
+        .then(data => {
+            response.success(req, res, data, 200)
+        })
+        .catch(error => {
+            response.error(req, res, error.message, 400, error)
+        })
+})
+
+router.patch('/:id' ,(req, res) => {
+    
+    const {title, salary, rating, description, company, url, skill, rate, user, country, city} =req.body
+    
+    controller.updatePost(req.params.id , title, salary, rating, description, company, url, skill, rate, user, country, city)
+        .then(data => {
+            response.success(req, res, data, 200)
+        })
+        .catch(error => {
+            response.error(req, res, error.message, 400, error)
+        }) 
 })
 
 module.exports = router

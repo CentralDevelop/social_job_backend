@@ -1,17 +1,16 @@
 const store = require("./store")
 
 
-const getPost = () => {
+const getAllPost = () => {
     return new Promise ((resolve, reject) => {
         resolve(store.get())
     })
 }
 
 
-
-const addPost = (title, salary, rating, description, company, url, skill, rate, user, location, image) => {
+const addPost = (title, salary, rating, description, company, url, skill, rate, user, country, city , image) => {
     return new Promise((resolve, reject) => {
-        if (!title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !location) {
+        if (!title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city) {
             console.log("[CONTROLLER] invalid data form")
             reject('Missing data')
           }
@@ -32,7 +31,8 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
             skill,
             rate,
             user,
-            location
+            country,
+            city
           }
           store.add(post)
 
@@ -45,7 +45,37 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
     })
 }
 
+const updatePost = async (id, title, salary, rating, description, company, url, skill, rate, user, country, city) => {
+    return new Promise((resolve, reject) => {
+        if ( !id || !title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city) {
+            console.log("[CONTROLLER] invalid data form")
+            reject('Missing data')
+          }
+
+
+        const post = {
+            title,
+            //image: fileUrl,
+            salary,
+            rating,
+            description,
+            company,
+            url,
+            skill,
+            rate,
+            user,
+            country,
+            city
+          }
+          
+
+
+          resolve(store.update(id, post))
+    })
+}
+
 module.exports = {
     addPost,
-    getPost,
+    getAllPost,
+    updatePost
 }
