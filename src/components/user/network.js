@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
     const data = await controller.getOne(id)
     response.success(req, res, data, 200)
   } catch (error) {
-    response.error(req, res, error.message, 500)
+    response.error(req, res, error.message, 400)
   }
 })
 
