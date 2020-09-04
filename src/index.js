@@ -4,7 +4,8 @@ const morgan = require('morgan')
 const app = express()
 const router = require('./api/routes')
 const db = require('./storage/index')
-
+const swaggerUI = require('swagger-ui-express')
+const swaggerDoc = require('../swagger.json')
 db()
 
 //  Server Config
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 //  Routes
 router(app)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 // statics
 app.use('/app', express.static('src/public'))
