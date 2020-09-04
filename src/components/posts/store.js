@@ -13,7 +13,7 @@ const get = async (fCountry, fCity)=> {
             filter = {
                 city: fCity
             }
-        }else if(fCountry !== null && fCity !== null){
+        } else if(fCountry !== null && fCity !== null){
             filter = {
                 country: fCountry,
                 city: fCity
