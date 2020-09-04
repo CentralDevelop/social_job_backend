@@ -46,16 +46,21 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
 }
 
 
-const updatePost = (id, title, salary, rating, description, company, url, skill, rate, user, country, city) => {
+const updatePost = (id, title, salary, rating, description, company, url, skill, rate, user, country, city, image) => {
     return new Promise((resolve, reject) => {
 
         if(!id || !title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city ){
             reject("Missing data")
         }
 
+        let fileUrl = ""
+          if (image){
+              fileUrl = `http://localhost:4000/app/files/${image.filename}`
+          }
+
         const post = {
             title,
-            //image: fileUrl,
+            image: fileUrl,
             salary,
             rating,
             description,

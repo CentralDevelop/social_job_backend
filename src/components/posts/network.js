@@ -3,11 +3,13 @@ const router = express.Router()
 const controller = require('./controller')
 const response = require('../../network/response')
 const multer = require('multer')
+const path = require('path')
 
 const storage = multer.diskStorage({
     destination: 'public/files',
     filename : function (req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now())
+        cb(null, file.filename + "-" + Date.now() +
+        path.extname(file.originalname))
     }
 })
 
@@ -39,11 +41,11 @@ router.post('/', upload.single('image') ,(req, res) => {
         })
 })
 
-router.patch('/:id' ,(req, res) => {
+router.patch('/:id' ,upload.single('image') ,(req, res) => {
     
     const { title, salary, rating, description, company, url, skill, rate, user, country, city } = req.body
 
-    controller.updatePost(req.params.id, title, salary, rating, description, company, url, skill, rate, user, country, city)
+    controller.updatePost(req.params.id, title, salary, rating, description, company, url, skill, rate, user, country, city, req.file)
         .then(data => {
             response.success(req, res, data, 200)
         })
