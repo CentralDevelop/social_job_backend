@@ -2,9 +2,26 @@ const model = require('../../storage/models/post')
 //const list = []
 
 
-const get = async ()=> {
-    
-    const posts = await model.find()
+const get = async (fCountry, fCity)=> {
+        filter = {}
+
+        if(fCountry !== null){
+            filter = {
+                country: fCountry
+            }
+        }else if(fCity !== null){
+            filter = {
+                city: fCity
+            }
+        }else if(fCountry !== null && fCity !== null){
+            filter = {
+                country: fCountry,
+                city: fCity
+            }
+        }
+ 
+ 
+    const posts = await model.find(filter)
     return posts
 }
 

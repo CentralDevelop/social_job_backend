@@ -15,7 +15,10 @@ const upload = multer({ storage: storage })
 
 router.get('/', (req, res) => {
     
-    controller.getAllPost()
+    let country = req.query.country || null
+    let city = req.query.city || null
+
+    controller.getAllPost(country, city)
         .then( data => {
             response.success(req, res, data, 200)
         })

@@ -1,9 +1,9 @@
 const store = require("./store")
 
 
-const getAllPost = () => {
+const getAllPost = (country, city) => {
     return new Promise ((resolve, reject) => {
-        resolve(store.get())
+        resolve(store.get(country, city))
     })
 }
 
@@ -67,10 +67,14 @@ const updatePost = (id, title, salary, rating, description, company, url, skill,
             country,
             city
           }
-
-
+          
         const result = store.update(id, post)
-        resolve(result)
+        
+        let finalResponse = {
+            post,
+            "System Message" : "Post succesfully updated"
+        }
+        resolve(finalResponse)
     })
 }
 
