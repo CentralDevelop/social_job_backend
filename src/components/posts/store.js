@@ -1,6 +1,5 @@
-const model = require('../../storage/models/post')
-//const list = []
-
+const Model = require('../../storage/models/post')
+// const list = []
 
 const get = async (fCountry, fCity)=> {
         filter = {}
@@ -25,12 +24,11 @@ const get = async (fCountry, fCity)=> {
     return posts
 }
 
-
 const add = (post) => {
-    // list.push(post)
-    // console.log(list)
-    const newPost = new model(post)
-    newPost.save()
+  // list.push(post)
+  // console.log(list)
+  const newPost = new Model(post)
+  newPost.save()
 }
 
 const update = async (id, post) => {

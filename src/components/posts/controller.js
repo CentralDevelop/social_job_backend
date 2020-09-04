@@ -1,5 +1,4 @@
-const store = require("./store")
-
+const store = require('./store')
 
 const getAllPost = (country, city) => {
     return new Promise ((resolve, reject) => {
