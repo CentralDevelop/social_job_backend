@@ -19,8 +19,9 @@ router.get('/', (req, res) => {
     
     let country = req.query.country || null
     let city = req.query.city || null
-
-    controller.getAllPost(country, city)
+    let skill = req.query.skill || null
+    
+    controller.getAllPost(country, city, skill)
         .then( data => {
             response.success(req, res, data, 200)
         })
@@ -31,8 +32,8 @@ router.get('/', (req, res) => {
 
 
 router.post('/', upload.single('image') ,(req, res) => {
-    const { title, salary, rating, description, company, url, skill, rate, user, country, city } = req.body
-    controller.addPost(title, salary, rating, description, company, url, skill, rate, user, country, city, req.file)
+    const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
+    controller.addPost(title, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
             response.success(req, res, data, 200)
         })
@@ -43,9 +44,9 @@ router.post('/', upload.single('image') ,(req, res) => {
 
 router.patch('/:id' ,upload.single('image') ,(req, res) => {
     
-    const { title, salary, rating, description, company, url, skill, rate, user, country, city } = req.body
+    const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
 
-    controller.updatePost(req.params.id, title, salary, rating, description, company, url, skill, rate, user, country, city, req.file)
+    controller.updatePost(req.params.id, title, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
             response.success(req, res, data, 200)
         })
