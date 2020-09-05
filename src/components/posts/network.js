@@ -4,6 +4,7 @@ const controller = require('./controller')
 const response = require('../../network/response')
 const multer = require('multer')
 const path = require('path')
+const checkAuth = require('../../api/middleware/check-auth')
 
 const storage = multer.diskStorage({
     destination: 'public/files',
@@ -31,7 +32,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/', upload.single('image') ,(req, res) => {
+router.post('/',checkAuth, upload.single('image') ,(req, res) => {
     const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
     controller.addPost(title, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
