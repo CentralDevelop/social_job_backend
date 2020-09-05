@@ -9,9 +9,9 @@ const getAllPost = async (country, city, skill) => {
 }
 
 
-const addPost = (title, salary, rating, description, company, url, skill, rate, user, country, city , image) => {
+const addPost = (title, salary, rating, description, company, url, skill, user, country, city , image) => {
     return new Promise((resolve, reject) => {
-        if (!title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city) {
+        if (!title || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
             console.log("[CONTROLLER] invalid data form")
             reject('Missing data')
           }
@@ -30,7 +30,6 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
             company,
             url,
             skill,
-            rate,
             user,
             country,
             city
@@ -47,10 +46,10 @@ const addPost = (title, salary, rating, description, company, url, skill, rate, 
 }
 
 
-const updatePost = (id, title, salary, rating, description, company, url, skill, rate, user, country, city, image) => {
+const updatePost = (id, title, salary, rating, description, company, url, skill, user, country, city, image) => {
     return new Promise((resolve, reject) => {
 
-        if(!id || !title || !salary || !rating || !description || !company || !url || !skill || !rate || !user || !country || !city ){
+        if(!id || !title || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city ){
             reject("Missing data")
         }
 
@@ -68,7 +67,6 @@ const updatePost = (id, title, salary, rating, description, company, url, skill,
             company,
             url,
             skill,
-            rate,
             user,
             country,
             city
