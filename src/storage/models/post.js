@@ -18,7 +18,7 @@ const mySchema = new Schema({
     default: undefined,
   },
   user: {
-    type: Schema.ObjectID,
+    type: Schema.ObjectId,
     ref: 'User'
   },
   country:String,
