@@ -19,8 +19,9 @@ router.get('/', (req, res) => {
     
     let country = req.query.country || null
     let city = req.query.city || null
-
-    controller.getAllPost(country, city)
+    let skill = req.query.skill || null
+    
+    controller.getAllPost(country, city, skill)
         .then( data => {
             response.success(req, res, data, 200)
         })

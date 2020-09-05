@@ -2,7 +2,7 @@ const model = require('../../storage/models/post')
 //const list = []
 
 
-const get = async (fCountry, fCity)=> {
+const get = async (fCountry, fCity, fSkill)=> {
         filter = {}
 
         if(fCountry !== null){
@@ -13,12 +13,11 @@ const get = async (fCountry, fCity)=> {
             filter = {
                 city: fCity
             }
-        } /* else if(fCountry !== null && fCity !== null){
+        }else if (fSkill !== null){
             filter = {
-                country: fCountry,
-                city: fCity
+                skill : fSkill
             }
-        } */
+        }
  
  
     const posts = await model.find(filter)

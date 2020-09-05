@@ -4,27 +4,25 @@ const Schema = mongoose.Schema
 
 const mySchema = new Schema({
   title: String,
-  image: String, // no sure
+  image: String, 
   salary: Number,
-  rating: Number,
+  rating: {
+    type:[String],
+    default: undefined
+  },
   description: String,
   company: String,
   url: String,
-  skills: [{
-    type: String
-  }],
-  rate: Number,
+  skill: {
+    type: [String],
+    default: undefined,
+  },
   user: {
-    // type: Schema.ObjectID,
-    // ref: 'User'
-    type: String
+    type: Schema.ObjectID,
+    ref: 'User'
   },
   country:String,
-  city:String /* {
-    country: String,
-    city: String
-  } */
-
+  city:String ,
 })
 
 const postsModel = mongoose.model('Post', mySchema)

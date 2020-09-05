@@ -1,10 +1,11 @@
 const store = require("./store")
 
 
-const getAllPost = (country, city) => {
-    return new Promise ((resolve, reject) => {
-        resolve(store.get(country, city))
-    })
+const getAllPost = async (country, city, skill) => {
+    
+    let getIt = await store.get(country, city, skill)
+    return getIt
+    
 }
 
 
