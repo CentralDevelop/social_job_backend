@@ -18,13 +18,12 @@ const mySchema = new Schema({
     default: undefined,
   },
   user: {
-    type: Schema.ObjectID,
+    type: Schema.ObjectId,
     ref: 'User'
   },
   country:String,
   city:String ,
 })
-
 const postsModel = mongoose.model('Post', mySchema)
 
 module.exports = postsModel
