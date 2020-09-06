@@ -1,7 +1,9 @@
-const Model = require('../../storage/models/post')
+const Model = require('../../storage/Models/post')
 // const list = []
 
 const get = async (fCountry, fCity, fSkill)=> {
+        
+        
         filter = {}
 
         if(fCountry !== null){
@@ -19,7 +21,7 @@ const get = async (fCountry, fCity, fSkill)=> {
         }
  
  
-    const posts = await model.find(filter)
+    const posts = await Model.find(filter)
     return posts
 }
 
@@ -31,7 +33,7 @@ const add = (post) => {
 }
 
 const update = async (id, post) => {
-    let retrievedPost = await model.findOne({
+    let retrievedPost = await Model.findOne({
         _id: id
     })
 
@@ -42,12 +44,12 @@ const update = async (id, post) => {
     retrievedPost = Object.fromEntries(entrie)
 
     console.log(retrievedPost)
-    const newdPost = await model.findByIdAndUpdate(id, retrievedPost)
+    const newdPost = await Model.findByIdAndUpdate(id, retrievedPost)
     return newdPost
 }
 
 const remove = (id) => {
-    return model.deleteOne({
+    return Model.deleteOne({
         _id: id
     })
 }

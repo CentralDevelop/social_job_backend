@@ -24,7 +24,6 @@ const mySchema = new Schema({
   country:String,
   city:String ,
 })
-
 const postsModel = mongoose.model('Post', mySchema)
 
 module.exports = postsModel
