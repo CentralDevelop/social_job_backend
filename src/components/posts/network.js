@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/create', upload.single('image') ,(req, res) => {
+router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
     const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
     controller.addPost(title, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
