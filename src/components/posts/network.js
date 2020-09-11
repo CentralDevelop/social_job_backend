@@ -16,19 +16,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     
     let country = req.query.country || null
     let city = req.query.city || null
     let skill = req.query.skill || null
     
-    controller.getAllPost(country, city, skill)
-        .then( data => {
-            response.success(req, res, data, 200)
-        })
-        .catch(error => {
+        try{
+            const result = await controller.getAllPost(country, city, skill)
+            if(result === false){
+                response.status(400).json({
+                    message: "Post not found"
+                })
+            } 
+            response.success(req, res, result, 200)
+        }catch (error){
             response.error(req, res, error.message, 400, error)
-        })
+        }
 })
 
 

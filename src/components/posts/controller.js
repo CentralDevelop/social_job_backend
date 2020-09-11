@@ -2,8 +2,8 @@ const store = require('./store')
 
 const getAllPost = async (country, city, skill) => {
     
-    let getIt = await store.get(country, city, skill)
-    return getIt
+    let result = await store.get(country, city, skill)   
+    return result
     
 }
 
