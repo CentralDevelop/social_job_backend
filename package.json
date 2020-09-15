@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "standard",
     "lint-fix": "standard --fix",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",

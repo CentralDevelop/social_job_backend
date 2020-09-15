@@ -4,10 +4,10 @@ const Schema = mongoose.Schema
 
 const mySchema = new Schema({
   position: String,
-  image: String, 
+  image: String,
   salary: Number,
   rating: {
-    type:[String],
+    type: [String],
     default: undefined
   },
   description: String,
@@ -15,14 +15,14 @@ const mySchema = new Schema({
   url: String,
   skill: {
     type: [String],
-    default: undefined,
+    default: undefined
   },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
   },
-  country:String,
-  city:String ,
+  country: String,
+  city: String
 })
 const postsModel = mongoose.model('Post', mySchema)
 
