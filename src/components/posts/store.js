@@ -1,4 +1,4 @@
-const Model = require('../../storage/Models/post')
+const Model = require('../../storage/models/post')
 // const list = []
 
 const get = async (fCountry, fCity, fSkill)=> {

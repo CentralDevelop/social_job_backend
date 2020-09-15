@@ -37,8 +37,8 @@ router.get('/', async (req, res) => {
 
 
 router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
-    const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
-    controller.addPost(title, salary, rating, description, company, url, skill, user, country, city, req.file)
+    const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
+    controller.addPost(position, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
             response.success(req, res, data, 200)
         })
@@ -49,9 +49,9 @@ router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
 
 router.patch('/:id' ,checkAuth ,upload.single('image') ,(req, res) => {
     
-    const { title, salary, rating, description, company, url, skill, user, country, city } = req.body
+    const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
 
-    controller.updatePost(req.params.id, title, salary, rating, description, company, url, skill, user, country, city, req.file)
+    controller.updatePost(req.params.id, position, salary, rating, description, company, url, skill, user, country, city, req.file)
         .then(data => {
             response.success(req, res, data, 200)
         })

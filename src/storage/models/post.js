@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const mySchema = new Schema({
-  title: String,
+  position: String,
   image: String, 
   salary: Number,
   rating: {
