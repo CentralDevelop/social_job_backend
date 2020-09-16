@@ -10,7 +10,6 @@ db('')
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)
-console.log(process.env)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
