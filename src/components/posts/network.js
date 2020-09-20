@@ -35,6 +35,21 @@ router.get('/', async (req, res) => {
         }
 })
 
+router.get('/:id', async (req, res) => {
+
+        try{
+            const result = await controller.getPots(req.params.id)
+            if(result === false){
+                response.status(400).json({
+                    message: "Post not found"
+                })
+            } 
+            response.success(req, res, result, 200)
+        }catch (error){
+            response.error(req, res, error.message, 400, error)
+        }
+})
+
 
 router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
     const { position, salary, rating, description, company, url, skill, user, country, city } = req.body

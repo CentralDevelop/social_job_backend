@@ -7,6 +7,15 @@ const getAllPost = async (country, city, skill) => {
     
 }
 
+const getPost = async (id) => {
+    
+    let result = await store.getFilter(id)   
+    return result
+    
+}
+
+
+
 
 const addPost = (title, salary, rating, description, company, url, skill, user, country, city , image) => {
     return new Promise((resolve, reject) => { 
@@ -103,6 +112,7 @@ const deletePost = (id) => {
 module.exports = {
     addPost,
     getAllPost,
+    getPost,
     updatePost,
     deletePost
 }
