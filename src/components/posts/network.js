@@ -47,7 +47,7 @@ router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
         })
 })
 
-router.patch('/:id' ,checkAuth ,upload.single('image') ,(req, res) => {
+router.put('/:id' ,checkAuth ,upload.single('image') ,(req, res) => {
     
     const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
 
