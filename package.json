@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "standard",
     "lint-fix": "standard --fix",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,6 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "standard": "^14.3.4"
   }

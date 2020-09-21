@@ -35,7 +35,7 @@ const addUser = async (fullname, email, username, password) => {
 const loginController = async (email, password) => {
   const user = await storage.getOneByFilter({ email })
 
-  if(user.length < 1) {
+  if (user.length < 1) {
     throw new Error('Login failed')
   }
   const isCorrect = bcrypt.compareSync(password, user[0].password)

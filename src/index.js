@@ -1,6 +1,5 @@
 require('dotenv').config()
 const express = require('express')
-const morgan = require('morgan')
 const app = express()
 const router = require('./api/routes')
 const db = require('./storage/index')
@@ -11,7 +10,6 @@ db('')
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)
-app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
