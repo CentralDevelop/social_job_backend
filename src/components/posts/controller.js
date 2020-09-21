@@ -5,6 +5,11 @@ const getAllPost = async (country, city, skill) => {
   return result
 }
 
+const getPost = async (id) => {
+  const result = await store.getFilter(id)
+  return result
+}
+
 const addPost = (position, salary, rating, description, company, url, skill, user, country, city, image) => {
   return new Promise((resolve, reject) => {
     if (!position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
@@ -93,8 +98,9 @@ const deletePost = (id) => {
 }
 
 module.exports = {
-  addPost,
-  getAllPost,
-  updatePost,
-  deletePost
+    addPost,
+    getAllPost,
+    getPost,
+    updatePost,
+    deletePost
 }

@@ -22,6 +22,11 @@ const get = async (fCountry, fCity, fSkill) => {
   return posts
 }
 
+const getFilter = async (id)=> {        
+    const posts = await Model.findOne({ _id: id })
+    return posts
+}
+
 const add = (post) => {
   // list.push(post)
   // console.log(list)
@@ -51,8 +56,9 @@ const remove = (id) => {
 }
 
 module.exports = {
-  add,
-  get,
-  update,
-  remove
+    add,
+    get,
+    getFilter,
+    update,
+    remove,
 }
