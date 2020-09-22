@@ -5,6 +5,12 @@ const router = require('./api/routes')
 const db = require('./storage/index')
 const swaggerUI = require('swagger-ui-express')
 const swaggerDoc = require('../swagger.json')
+const cors = require('cors')
+const helmet = require('helmet')
+const corsOptions = {
+  origin: 'https://localhost:5500',
+}
+
 
 db('')
 
@@ -12,6 +18,9 @@ db('')
 app.set('port', process.env.PORT || 4000)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors(corsOptions))
+app.use(helmet())
+
 
 //  Routes
 router(app)
