@@ -92,9 +92,25 @@ const deletePost = (id) => {
   })
 }
 
+const favoritePost = (id) => {
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Missing data')
+    }
+    store.addFavotire(id)
+      .then(() => {
+        resolve('Favorite add')
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
+}
+
 module.exports = {
   addPost,
   getAllPost,
   updatePost,
-  deletePost
+  deletePost,
+  favoritePost
 }

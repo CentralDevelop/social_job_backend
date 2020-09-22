@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { favoritePost } = require('../../components/posts/controller')
 
 const Schema = mongoose.Schema
 
@@ -9,7 +10,8 @@ const mySchema = new Schema({
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
   username: String,
-  password: String
+  password: String,
+  favorite: Array
 })
 
 const userModel = mongoose.model('User', mySchema)

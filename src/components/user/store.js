@@ -41,11 +41,16 @@ const deleteUser = async (id) => {
   }
 }
 
+const getAllFavoritesPost = () => {
+  return Model.favorites({})
+}
+
 module.exports = {
   add: addUser,
   getOneUser,
   getAllUsers,
   updateUser,
   deleteUser,
-  getOneByFilter
+  getOneByFilter,
+  getAllFavoritesPost
 }

@@ -21,11 +21,14 @@ const addUser = async (fullname, email, username, password) => {
       })
     })
 
+    const favorites = []
+
     const user = {
       fullname,
       email,
       username,
-      password: hashedPassword
+      password: hashedPassword,
+      favorites
     }
 
     return storage.add(user)
@@ -85,11 +88,16 @@ const deleteUserController = async (id) => {
   }
 }
 
+const getAllFavorites = () => {
+  return storage.getAllFavoritesPost()
+}
+
 module.exports = {
   add: addUser,
   getOne,
   getAll,
   updateUser,
   deleteUserController,
-  loginController
+  loginController,
+  getAllFavorites
 }

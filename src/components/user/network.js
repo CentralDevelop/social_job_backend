@@ -77,4 +77,13 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+router.get('/favorites', async (req, res) => {
+  try {
+    const dataFav = await controller.getAllFavorites()
+    response.success(req, res, dataFav, 200)
+  } catch (error) {
+    response.error(req, res, 'Something wrong happend', 500, error)
+  }
+})
+
 module.exports = router

@@ -5,6 +5,7 @@ const response = require('../../network/response')
 const multer = require('multer')
 const path = require('path')
 const checkAuth = require('../../api/middleware/check-auth')
+const { route } = require('../user/network')
 
 const storage = multer.diskStorage({
   destination: 'public/files',
@@ -59,6 +60,16 @@ router.patch('/:id', checkAuth, upload.single('image'), (req, res) => {
 
 router.delete('/:id', (req, res) => {
   controller.deletePost(req.params.id)
+    .then(data => {
+      response.success(req, res, data, 200)
+    })
+    .catch(error => {
+      response.error(req, res, error.message, 400, error)
+    })
+})
+
+router.post('/:id', (req, res) => {
+  controller.favoritePost(req.params.id)
     .then(data => {
       response.success(req, res, data, 200)
     })

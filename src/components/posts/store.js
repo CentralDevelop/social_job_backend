@@ -1,4 +1,7 @@
+const { model } = require('../../storage/models/post')
 const Model = require('../../storage/models/post')
+const userModel = require('../../storage/models/user')
+const { favoritePost } = require('./controller')
 // const list = []
 
 const get = async (fCountry, fCity, fSkill) => {
@@ -50,9 +53,14 @@ const remove = (id) => {
   })
 }
 
+const addFavotire = (id) => {
+  userModel.favorite.push(id)
+}
+
 module.exports = {
   add,
   get,
   update,
-  remove
+  remove,
+  addFavotire
 }
