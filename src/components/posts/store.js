@@ -42,7 +42,7 @@ const add = (post) => {
   // list.push(post)
   // console.log(list)
   const newPost = new Model(post)
-  newPost.save()
+  return newPost.save()
 }
 
 const update = async (id, post) => {

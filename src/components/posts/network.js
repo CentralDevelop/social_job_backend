@@ -53,16 +53,19 @@ router.get('/:id', async (req, res) => {
 })
 
 
-router.post('/create',checkAuth ,upload.single('image') ,(req, res) => {
+router.post('/create',checkAuth ,upload.single('image') , async (req, res) => {
+  
+  try {
     const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
-    controller.addPost(position, salary, rating, description, company, url, skill, user, country, city, req.file)
-        .then(data => {
-            response.success(req, res, data, 200)
-        })
-        .catch(error => {
-            response.error(req, res, error.message, 400, error)
-        })
-})
+    
+    const post = await controller.addPost(position, salary, rating, description, company, url, skill, user, country, city, req.file)
+
+    response.success(req, res, post, 200)
+   } catch (error) {
+    response.error(req, res, error.message, 400, error)
+   }
+   
+  })
 
 router.put('/:id' ,checkAuth ,upload.single('image') ,(req, res) => {
     
