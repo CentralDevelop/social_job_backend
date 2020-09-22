@@ -1,7 +1,7 @@
 const Model = require('../../storage/models/post')
 // const list = []
 
-const get = async (fCountry, fCity, fSkill)=> {
+const get = async (fCountry, fCity, fSkill, fPosition, fSalary)=> {
         
         
         filter = {}
@@ -17,6 +17,14 @@ const get = async (fCountry, fCity, fSkill)=> {
         }else if (fSkill !== null){
             filter = {
                 skill : fSkill
+            }
+        }else if (fPosition !== null){
+            filter = {
+                position: fPosition
+            }
+        }else if (fSalary !== null){
+            filter = {
+                salary: fSalary
             }
         }
  

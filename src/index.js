@@ -7,7 +7,7 @@ const db = require('./storage/index')
 const swaggerUI = require('swagger-ui-express')
 const swaggerDoc = require('../swagger.json')
 
-db('')
+db('mongodb+srv://omargnzlz645:resina96@cluster0.biyni.mongodb.net/social_job?retryWrites=true&w=majority')
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)

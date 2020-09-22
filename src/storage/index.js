@@ -1,3 +1,4 @@
+require('dotenv').config()
 const db = require('mongoose')
 
 db.Promise = global.Promise

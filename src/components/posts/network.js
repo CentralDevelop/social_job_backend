@@ -21,9 +21,11 @@ router.get('/', async (req, res) => {
     let country = req.query.country || null
     let city = req.query.city || null
     let skill = req.query.skill || null
+    let salary = req.query.skill || null
+    let position = req.query.skill || null
     
         try{
-            const result = await controller.getAllPost(country, city, skill)
+            const result = await controller.getAllPost(country, city, skill, position, salary)
             if(result === false){
                 response.status(400).json({
                     message: "Post not found"
