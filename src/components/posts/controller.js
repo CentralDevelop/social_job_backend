@@ -8,10 +8,8 @@ const getAllPost = async (country, city, skill, position, salary) => {
 }
 
 const getPost = async (id) => {
-    
-    let result = await store.getFilter(id)   
-    return result
-    
+  const result = await store.getFilter(id)
+  return result
 }
 
 
@@ -96,21 +94,20 @@ const updatePost = (id, position, salary, rating, description, company, url, ski
     })
 }
 
-
 const deletePost = (id) => {
-    return new Promise ((resolve, reject) => {
-        if(!id) {
-            reject("Missing data")
-        }
+  return new Promise((resolve, reject) => {
+    if (!id) {
+      reject('Missing data')
+    }
 
-        store.remove(id)
-            .then(() => {
-                resolve("Post deleted")
-            })
-            .catch(error => {
-                reject(error)
-            })
-    })
+    store.remove(id)
+      .then(() => {
+        resolve('Post deleted')
+      })
+      .catch(error => {
+        reject(error)
+      })
+  })
 }
 
 module.exports = {

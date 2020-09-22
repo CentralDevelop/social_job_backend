@@ -4,7 +4,6 @@ const controller = require('./controller')
 const response = require('../../network/response')
 const checkAuth = require('../../api/middleware/check-auth')
 
-
 router.get('/', async (req, res) => {
   try {
     const data = await controller.getAll()
@@ -40,9 +39,9 @@ router.post('/login', async (req, res, next) => {
   try {
     const token = await controller.loginController(email, password)
     console.log(token)
-    let finalResponse = {
-      Message: "Auth success",
-      token,
+    const finalResponse = {
+      Message: 'Auth success',
+      token
     }
     if (token) {
       response.success(req, res, finalResponse, 200)
