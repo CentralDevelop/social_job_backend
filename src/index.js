@@ -17,6 +17,18 @@ app.use(express.urlencoded({ extended: true }))
 router(app)
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
+//  Not found route
+app.use((req, res, next) => {
+  res.status(404);
+
+  if (req.accepts('json')) {
+    res.send({error: '404 Not found'})
+  }else {
+    res.type('txt').send('404 Not found')
+  }
+  
+})
+
 // statics
 app.use('/app', express.static('src/public'))
 
