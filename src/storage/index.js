@@ -3,9 +3,9 @@ const db = require('mongoose')
 
 db.Promise = global.Promise
 
-const connect = async () => {
+const connect = async (url) => {
   try {
-    await db.connect(process.env.DB_URL, {
+    await db.connect(url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false
