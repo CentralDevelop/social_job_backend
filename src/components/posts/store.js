@@ -2,6 +2,7 @@ const { model } = require('../../storage/models/post')
 const Model = require('../../storage/models/post')
 const userModel = require('../../storage/models/user')
 const { favoritePost } = require('./controller')
+
 // const list = []
 
 const get = async (fCountry, fCity, fSkill) => {
@@ -53,8 +54,13 @@ const remove = (id) => {
   })
 }
 
-const addFavotire = (id) => {
-  userModel.favorite.push(id)
+const addFavorite = async (id, idUser) => {
+  const data = await userModel.findById(idUser)
+  
+  console.log('[Storage ready]')
+  console.log('[*************************]')
+  console.log(data)
+  console.log('[*************************]')
 }
 
 module.exports = {
@@ -62,5 +68,5 @@ module.exports = {
   get,
   update,
   remove,
-  addFavotire
+  addFavorite
 }
