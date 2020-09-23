@@ -56,7 +56,9 @@ const remove = (id) => {
 
 const addFavorite = async (id, idUser) => {
   const data = await userModel.findById(idUser)
-  
+  data.favorite.push(id)
+  data.save()
+  userModel.update()
   console.log('[Storage ready]')
   console.log('[*************************]')
   console.log(data)
