@@ -9,7 +9,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 
-db('mongodb+srv://omargnzlz645:resina96@cluster0.biyni.mongodb.net/social_job?retryWrites=true&=majority')
+db('')
 
 //  Server Config
 app.set('port', process.env.PORT || 4000)
