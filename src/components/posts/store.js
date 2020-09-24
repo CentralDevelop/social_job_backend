@@ -70,7 +70,7 @@ const getFilter = async (id)=> {
     
 }
 
-const add =  (post) => {
+const add = (post) => {
   const newPost = new Model(post)
   return newPost.save()
 }
