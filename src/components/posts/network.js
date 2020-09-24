@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 
         try{
-            const result = await controller.getPots(req.params.id)
+            const result = await controller.getPost(req.params.id)
             if(result === false){
                 response.status(400).json({
                     message: "Post not found"
@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
 })
 
 
-router.post('/create',checkAuth ,upload.single('image') , async (req, res) => {
+router.post('/create',checkAuth, upload.single('image') , async (req, res) => {
   
   try {
     const { position, salary, rating, description, company, url, skill, user, country, city } = req.body

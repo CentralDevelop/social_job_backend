@@ -2,45 +2,75 @@ const Model = require('../../storage/models/post')
 // const list = []
 
 const get = async (fCountry, fCity, fSkill, fPosition, fSalary)=> {
-        
-        
-        filter = {}
+        return new Promise((resolve, reject) => {
+            filter = {}
 
-        if(fCountry !== null){
-            filter = {
-                country: fCountry
+            if(fCountry !== null){
+                filter = {
+                    country: fCountry
+                }
+            }else if(fCity !== null){
+                filter = {
+                    city: fCity
+                }
+            }else if (fSkill !== null){
+                filter = {
+                    skill : fSkill
+                }
+            }else if (fPosition !== null){
+                filter = {
+                    position: fPosition
+                }
+            }else if (fSalary !== null){
+                filter = {
+                    salary: fSalary
+                }
             }
-        }else if(fCity !== null){
-            filter = {
-                city: fCity
-            }
-        }else if (fSkill !== null){
-            filter = {
-                skill : fSkill
-            }
-        }else if (fPosition !== null){
-            filter = {
-                position: fPosition
-            }
-        }else if (fSalary !== null){
-            filter = {
-                salary: fSalary
-            }
-        }
- 
- 
-    const posts = await Model.find(filter)
-    return posts
+    
+    
+            Model.find(filter).
+            populate({path: 'user', options: {
+                select: {
+                    fullname: 1,
+                    email: 1,
+                    username: 1
+                }
+            }}).
+            exec((error, data) => {
+                if(error){
+                    reject(error)
+                }
+
+                resolve(data)
+            })
+
+        })  
 }
 
 const getFilter = async (id)=> {        
-    const posts = await Model.findOne({ _id: id })
-    return posts
+    return new Promise((resolve, reject) => {
+        
+        Model.findOne({ _id: id }).
+        populate({path: 'user', options: {
+            select: {
+                fullname: 1,
+                email: 1,
+                username: 1
+            }
+        }}).
+        exec((error, data) => {
+            if(error){
+                reject(error)
+            }
+
+            resolve(data)
+        })
+
+    })
+    
 }
 
-const add = (post) => {
-  // list.push(post)
-  // console.log(list)
+const add =  (post) => {
   const newPost = new Model(post)
   return newPost.save()
 }
