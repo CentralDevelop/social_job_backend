@@ -97,24 +97,9 @@ const favoritePost = async (id, idUser) => {
   if(!id || !idUser){
     throw new Error('falta informacion')
   } else {
-    console.log('[Controller ready]')
-    console.log(`El id del usuario es ${idUser}`)
-    console.log(`El id del post es ${id}`)
     const data = await store.addFavorite(id, idUser)
     return data
   }
-  /*
-  return new Promise((resolve, reject) => {
-    if (!id || !idUser) {
-      reject('Missing data')
-    }
-      console.log('[Controller ready]')
-      const data = userModel.favorite.find(idUser)
-      store.addFavorite(data, id)
-
-      resolve('Added to favorites')
-  })
-  */
 }
 
 module.exports = {

@@ -77,12 +77,14 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-router.get('/favorites', async (req, res) => {
+router.get('/fav/:id', async (req, res) => {
+  const { id } = req.params
+
   try {
-    const data = await controller.getAllFavorites()
+    const data = await controller.getAllFavorites(id)
     response.success(req, res, data, 200)
   } catch (error) {
-    response.error(req, res, 'Something wrong happend', 500, error)
+    response.error(req, res, error.message, 400)
   }
 })
 

@@ -1,6 +1,7 @@
 const storage = require('./store')
 const bcrypt = require('bcrypt')
 const auth = require('../../auth/index')
+const store = require('../posts/store')
 
 const addUser = async (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {
@@ -52,6 +53,7 @@ const getOne = async (id) => {
   if (!id) {
     throw new Error('id needed')
   } else {
+    console.log(id)
     const data = await storage.getOneUser(id)
     return data
   }
@@ -88,8 +90,13 @@ const deleteUserController = async (id) => {
   }
 }
 
-const getAllFavorites = () => {
-  return storage.getAllFavoritesPost()
+const getAllFavorites = async (id) => {
+  if (!id) {
+    throw new Error('id needed')
+  } else {
+    const data = await storage.getFavPost(id)
+    return data
+  }
 }
 
 module.exports = {
