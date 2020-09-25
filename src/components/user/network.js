@@ -38,7 +38,6 @@ router.post('/login', async (req, res, next) => {
   const { email, password } = req.body
   try {
     const token = await controller.loginController(email, password)
-    console.log(token)
     const finalResponse = {
       Message: 'Auth success',
       token
@@ -49,7 +48,6 @@ router.post('/login', async (req, res, next) => {
       throw new Error('Login failed')
     }
   } catch (error) {
-    console.log(error.message)
     response.error(req, res, error.message, 401, error)
   }
 })

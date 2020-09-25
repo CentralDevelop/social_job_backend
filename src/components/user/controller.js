@@ -40,7 +40,7 @@ const loginController = async (email, password) => {
   }
   const isCorrect = bcrypt.compareSync(password, user[0].password)
   if (isCorrect === true) {
-    const token = auth.createToken(user[0].email, user[0].username)
+    const token = auth.createToken(user[0]._id, user[0].email, user[0].username)
     return token
   }
 }
@@ -60,6 +60,19 @@ const getAll = () => {
 
 const updateUser = async (userUpdate) => {
   if (userUpdate) {
+    if (userUpdate.password) {
+      const hashedPassword = await new Promise((resolve, reject) => {
+        bcrypt.hash(userUpdate.password, 10, async (err, hashed) => {
+          if (err) {
+            reject(err)
+          } else {
+            resolve(hashed)
+          }
+        })
+      })
+
+      userUpdate.password = hashedPassword
+    }
     const filter = {
       _id: userUpdate._id
     }
@@ -70,7 +83,7 @@ const updateUser = async (userUpdate) => {
       throw new Error('User not found')
     }
   } else {
-    throw new Error('Fatal error')
+    throw new Error('Error updating user')
   }
 }
 

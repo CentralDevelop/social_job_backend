@@ -17,59 +17,53 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 router.get('/', async (req, res) => {
-    
-    let country = req.query.country || null
-    let city = req.query.city || null
-    let skill = req.query.skill || null
-    let salary = req.query.skill || null
-    let position = req.query.skill || null
-    
-        try{
-            const result = await controller.getAllPost(country, city, skill, position, salary)
-            if(result === false){
-                response.status(400).json({
-                    message: "Post not found"
-                })
-            } 
-            response.success(req, res, result, 200)
-        }catch (error){
-            response.error(req, res, error.message, 400, error)
-        }
+  const country = req.query.country || null
+  const city = req.query.city || null
+  const skill = req.query.skill || null
+  const salary = req.query.skill || null
+  const position = req.query.skill || null
+
+  try {
+    const result = await controller.getAllPost(country, city, skill, position, salary)
+    if (result === false) {
+      response.status(400).json({
+        message: 'Post not found'
+      })
+    }
+    response.success(req, res, result, 200)
+  } catch (error) {
+    response.error(req, res, error.message, 400, error)
+  }
 })
 
 router.get('/:id', async (req, res) => {
-
-        try{
-            const result = await controller.getPots(req.params.id)
-            if(result === false){
-                response.status(400).json({
-                    message: "Post not found"
-                })
-            } 
-            response.success(req, res, result, 200)
-        }catch (error){
-            response.error(req, res, error.message, 400, error)
-        }
+  try {
+    const result = await controller.getPots(req.params.id)
+    if (result === false) {
+      response.status(400).json({
+        message: 'Post not found'
+      })
+    }
+    response.success(req, res, result, 200)
+  } catch (error) {
+    response.error(req, res, error.message, 400, error)
+  }
 })
 
-
-router.post('/create',checkAuth ,upload.single('image') , async (req, res) => {
-  
+router.post('/create', checkAuth, upload.single('image'), async (req, res) => {
   try {
     const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
-    
+
     const post = await controller.addPost(position, salary, rating, description, company, url, skill, user, country, city, req.file)
 
     response.success(req, res, post, 200)
-   } catch (error) {
+  } catch (error) {
     response.error(req, res, error.message, 400, error)
-   }
-   
-  })
+  }
+})
 
-router.put('/:id' ,checkAuth ,upload.single('image') ,(req, res) => {
-    
-    const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
+router.put('/:id', checkAuth, upload.single('image'), (req, res) => {
+  const { position, salary, rating, description, company, url, skill, user, country, city } = req.body
 
   controller.updatePost(req.params.id, position, salary, rating, description, company, url, skill, user, country, city, req.file)
     .then(data => {

@@ -1,10 +1,8 @@
 const store = require('./store')
 
 const getAllPost = async (country, city, skill, position, salary) => {
-    
-    let result = await store.get(country, city, skill, position, salary)   
-    return result
-    
+  const result = await store.get(country, city, skill, position, salary)
+  return result
 }
 
 const getPost = async (id) => {
@@ -12,86 +10,77 @@ const getPost = async (id) => {
   return result
 }
 
-
-
-
 const addPost = async (position, salary, rating, description, company, url, skill, user, country, city, image) => {
-    
-        try {
-            
-            if (!position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
-                console.log("[CONTROLLER] invalid data form")
-                throw new Error("Missin Data")
-              }
-    
-              let fileUrl = ""
-              if (image){
-                  fileUrl = `http://localhost:4000/app/files/${image.filename}`
-              }
-    
-            const post = {
-                position,
-                image: fileUrl,
-                salary,
-                rating,
-                description,
-                company,
-                url,
-                skill,
-                user,
-                country,
-                city
-              }
-              const newPost= await store.add(post)
-    
-              finalResponse = {
-                  newPost,
-                  "System message": "Post successfully created"
-              }
-    
-              return (finalResponse)
-        } catch (error) {
-            throw new Error(error)
-        }
+  try {
+    if (!position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
+      console.log('[CONTROLLER] invalid data form')
+      throw new Error('Missin Data')
+    }
 
+    let fileUrl = ''
+    if (image) {
+      fileUrl = `http://localhost:4000/app/files/${image.filename}`
+    }
+
+    const post = {
+      position,
+      image: fileUrl,
+      salary,
+      rating,
+      description,
+      company,
+      url,
+      skill,
+      user,
+      country,
+      city
+    }
+    const newPost = await store.add(post)
+
+    finalResponse = {
+      newPost,
+      'System message': 'Post successfully created'
+    }
+
+    return (finalResponse)
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
-
 const updatePost = (id, position, salary, rating, description, company, url, skill, user, country, city, image) => {
-    return new Promise((resolve, reject) => {
-        
+  return new Promise((resolve, reject) => {
+    if (!id || !position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
+      reject('Missing data')
+    }
 
-        if(!id || !position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city ){
-            reject("Missing data")
-        }
+    let fileUrl = ''
+    if (image) {
+      fileUrl = `http://localhost:4000/app/files/${image.filename}`
+    }
 
-        let fileUrl = ""
-          if (image){
-              fileUrl = `http://localhost:4000/app/files/${image.filename}`
-          }
+    const post = {
+      position,
+      image: fileUrl,
+      salary,
+      rating,
+      description,
+      company,
+      url,
+      skill,
+      user,
+      country,
+      city
+    }
 
-        const post = {
-            position,
-            image: fileUrl,
-            salary,
-            rating,
-            description,
-            company,
-            url,
-            skill,
-            user,
-            country,
-            city
-          }
-          
-        const result = store.update(id, post)
-        
-        let finalResponse = {
-            post,
-            "System Message" : "Post succesfully updated"
-        }
-        resolve(finalResponse)
-    })
+    const result = store.update(id, post)
+
+    const finalResponse = {
+      post,
+      'System Message': 'Post succesfully updated'
+    }
+    resolve(finalResponse)
+  })
 }
 
 const deletePost = (id) => {
@@ -111,9 +100,9 @@ const deletePost = (id) => {
 }
 
 module.exports = {
-    addPost,
-    getAllPost,
-    getPost,
-    updatePost,
-    deletePost
+  addPost,
+  getAllPost,
+  getPost,
+  updatePost,
+  deletePost
 }

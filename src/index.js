@@ -8,7 +8,6 @@ const swaggerDoc = require('../swagger.json')
 const cors = require('cors')
 const helmet = require('helmet')
 
-
 db('')
 
 //  Server Config
@@ -18,21 +17,19 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(helmet())
 
-
 //  Routes
 router(app)
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 //  Not found route
 app.use((req, res, next) => {
-  res.status(404);
+  res.status(404)
 
   if (req.accepts('json')) {
-    res.send({error: '404 Not found'})
-  }else {
+    res.send({ error: '404 Not found' })
+  } else {
     res.type('txt').send('404 Not found')
   }
-  
 })
 
 // statics

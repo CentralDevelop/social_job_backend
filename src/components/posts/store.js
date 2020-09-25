@@ -1,41 +1,38 @@
 const Model = require('../../storage/models/post')
 // const list = []
 
-const get = async (fCountry, fCity, fSkill, fPosition, fSalary)=> {
-        
-        
-        filter = {}
+const get = async (fCountry, fCity, fSkill, fPosition, fSalary) => {
+  filter = {}
 
-        if(fCountry !== null){
-            filter = {
-                country: fCountry
-            }
-        }else if(fCity !== null){
-            filter = {
-                city: fCity
-            }
-        }else if (fSkill !== null){
-            filter = {
-                skill : fSkill
-            }
-        }else if (fPosition !== null){
-            filter = {
-                position: fPosition
-            }
-        }else if (fSalary !== null){
-            filter = {
-                salary: fSalary
-            }
-        }
- 
- 
-    const posts = await Model.find(filter)
-    return posts
+  if (fCountry !== null) {
+    filter = {
+      country: fCountry
+    }
+  } else if (fCity !== null) {
+    filter = {
+      city: fCity
+    }
+  } else if (fSkill !== null) {
+    filter = {
+      skill: fSkill
+    }
+  } else if (fPosition !== null) {
+    filter = {
+      position: fPosition
+    }
+  } else if (fSalary !== null) {
+    filter = {
+      salary: fSalary
+    }
+  }
+
+  const posts = await Model.find(filter)
+  return posts
 }
 
-const getFilter = async (id)=> {        
-    const posts = await Model.findOne({ _id: id })
-    return posts
+const getFilter = async (id) => {
+  const posts = await Model.findOne({ _id: id })
+  return posts
 }
 
 const add = (post) => {
@@ -67,9 +64,9 @@ const remove = (id) => {
 }
 
 module.exports = {
-    add,
-    get,
-    getFilter,
-    update,
-    remove,
+  add,
+  get,
+  getFilter,
+  update,
+  remove
 }
