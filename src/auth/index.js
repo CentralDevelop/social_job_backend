@@ -6,7 +6,7 @@ const createToken = (id, email, username) => {
     id,
     email,
     username
-  }, process.env.TOKEN_PHRS_KEY || 'secret', { expiresIn: '1h' })
+  }, process.env.TOKEN_PHRS_KEY || 'secret')
 
   return token
 }
