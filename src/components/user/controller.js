@@ -1,7 +1,6 @@
 const storage = require('./store')
 const bcrypt = require('bcrypt')
 const auth = require('../../auth/index')
-const store = require('../posts/store')
 
 const addUser = async (fullname, email, username, password) => {
   if (!fullname || !email || !username || !password) {

@@ -68,20 +68,20 @@ router.delete('/:id', (req, res) => {
 })
 
 router.post('/:id/:idUser', async (req, res) => {
-  try{
-      const data = await controller.favoritePost(req.params.id, req.params.idUser)
-      response.success(req, res, data, 200)
+  try {
+    const data = await controller.favoritePost(req.params.id, req.params.idUser)
+    response.success(req, res, data, 200)
   } catch (error) {
-      response.error(req, res, error.message, 400, error)
+    response.error(req, res, error.message, 400, error)
   }
 })
 
 router.delete('/:id/:idUser', async (req, res) => {
-  try{
-      const data = await controller.deleteFavoritePost(req.params.id, req.params.idUser)
-      response.success(req, res, data, 200)
+  try {
+    const data = await controller.deleteFavoritePost(req.params.id, req.params.idUser)
+    response.success(req, res, data, 200)
   } catch (error) {
-      response.error(req, res, error.message, 400, error)
+    response.error(req, res, error.message, 400, error)
   }
 })
 

@@ -93,7 +93,7 @@ const deletePost = (id) => {
 }
 
 const favoritePost = async (id, idUser) => {
-  if(!id || !idUser){
+  if (!id || !idUser) {
     throw new Error('falta informacion')
   } else {
     const data = await store.addFavorite(id, idUser)
@@ -102,7 +102,7 @@ const favoritePost = async (id, idUser) => {
 }
 
 const deleteFavoritePost = async (id, idUser) => {
-  if(!id || !idUser){
+  if (!id || !idUser) {
     throw new Error('falta informacion')
   } else {
     const data = await store.deleteFavorite(id, idUser)
