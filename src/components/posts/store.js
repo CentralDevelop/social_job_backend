@@ -61,10 +61,20 @@ const addFavorite = async (id, idUser) => {
   userModel.update()
 }
 
+const deleteFavorite = async (id, idUser) => {
+  const data = await userModel.findById(idUser)
+  data.favorite.remove({
+    _id: id
+  })
+  data.save()
+  userModel.update()
+}
+
 module.exports = {
   add,
   get,
   update,
   remove,
-  addFavorite
+  addFavorite,
+  deleteFavorite
 }

@@ -102,10 +102,20 @@ const favoritePost = async (id, idUser) => {
   }
 }
 
+const deleteFavoritePost = async (id, idUser) => {
+  if(!id || !idUser){
+    throw new Error('falta informacion')
+  } else {
+    const data = await store.deleteFavorite(id, idUser)
+    return data
+  }
+}
+
 module.exports = {
   addPost,
   getAllPost,
   updatePost,
   deletePost,
-  favoritePost
+  favoritePost,
+  deleteFavoritePost
 }

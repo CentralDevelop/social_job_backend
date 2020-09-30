@@ -11,11 +11,14 @@ const mySchema = new Schema({
   },
   username: String,
   password: String,
+  /*
   favorite: {
     type: [Schema.ObjectId],
     ref: 'Post',
     default: undefined,
   },
+  */
+  favorite: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
 })
 
 const userModel = mongoose.model('User', mySchema)
