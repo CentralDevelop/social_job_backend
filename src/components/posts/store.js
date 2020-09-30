@@ -1,7 +1,5 @@
-const { model } = require('../../storage/models/post')
 const Model = require('../../storage/models/post')
 const userModel = require('../../storage/models/user')
-const { favoritePost } = require('./controller')
 
 // const list = []
 

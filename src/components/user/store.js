@@ -1,11 +1,4 @@
-const { model } = require('../../storage/models/user')
 const Model = require('../../storage/models/user')
-const postModel = require('../../storage/models/post')
-const { post } = require('./network')
-const postsModel = require('../../storage/models/post')
-const { resolve } = require('path')
-const { rejects } = require('assert')
-const { promises } = require('fs')
 
 const addUser = async (user) => {
   const myUser = new Model(user)

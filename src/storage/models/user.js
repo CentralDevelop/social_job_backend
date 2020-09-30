@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { favoritePost } = require('../../components/posts/controller')
 
 const Schema = mongoose.Schema
 
@@ -11,13 +10,6 @@ const mySchema = new Schema({
   },
   username: String,
   password: String,
-  /*
-  favorite: {
-    type: [Schema.ObjectId],
-    ref: 'Post',
-    default: undefined,
-  },
-  */
   favorite: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
 })
 

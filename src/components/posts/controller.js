@@ -1,5 +1,4 @@
 const store = require('./store')
-const userModel = require('../../storage/models/user')
 
 const getAllPost = async (country, city, skill) => {
   const result = await store.get(country, city, skill)

@@ -5,7 +5,6 @@ const response = require('../../network/response')
 const multer = require('multer')
 const path = require('path')
 const checkAuth = require('../../api/middleware/check-auth')
-const { route } = require('../user/network')
 
 const storage = multer.diskStorage({
   destination: 'public/files',
