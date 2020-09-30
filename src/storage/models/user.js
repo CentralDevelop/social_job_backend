@@ -9,7 +9,8 @@ const mySchema = new Schema({
     match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   },
   username: String,
-  password: String
+  password: String,
+  favorite: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
 })
 
 const userModel = mongoose.model('User', mySchema)

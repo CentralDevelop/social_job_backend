@@ -21,11 +21,14 @@ const addUser = async (fullname, email, username, password) => {
       })
     })
 
+    const favorites = []
+
     const user = {
       fullname,
       email,
       username,
-      password: hashedPassword
+      password: hashedPassword,
+      favorites
     }
 
     return storage.add(user)
@@ -49,6 +52,7 @@ const getOne = async (id) => {
   if (!id) {
     throw new Error('id needed')
   } else {
+    console.log(id)
     const data = await storage.getOneUser(id)
     return data
   }
@@ -98,11 +102,21 @@ const deleteUserController = async (id) => {
   }
 }
 
+const getAllFavorites = async (id) => {
+  if (!id) {
+    throw new Error('id needed')
+  } else {
+    const data = await storage.getFavPost(id)
+    return data
+  }
+}
+
 module.exports = {
   add: addUser,
   getOne,
   getAll,
   updateUser,
   deleteUserController,
-  loginController
+  loginController,
+  getAllFavorites
 }
