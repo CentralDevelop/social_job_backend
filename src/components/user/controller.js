@@ -3,10 +3,16 @@ const bcrypt = require('bcrypt')
 const auth = require('../../auth/index')
 const store = require('../posts/store')
 
-const addUser = async (fullname, email, username, password) => {
+const addUser = async (fullname, email, username, password, image) => {
   if (!fullname || !email || !username || !password) {
     throw new Error('Missing data')
   }
+
+  let fileUrl = ''
+  if (image) {
+    fileUrl = `http://localhost:4000/app/files/${image.filename}`
+  }
+
   const emailExists = await storage.getOneByFilter({ email })
 
   if (emailExists.length >= 1) {
@@ -26,6 +32,7 @@ const addUser = async (fullname, email, username, password) => {
 
     const user = {
       fullname,
+      image: fileUrl,
       email,
       username,
       password: hashedPassword,
