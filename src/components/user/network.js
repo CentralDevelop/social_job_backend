@@ -2,7 +2,19 @@ const express = require('express')
 const router = express.Router()
 const controller = require('./controller')
 const response = require('../../network/response')
+const multer = require('multer')
+const path = require('path')
 const checkAuth = require('../../api/middleware/check-auth')
+
+const storage = multer.diskStorage({
+  destination: 'public/files',
+  filename: function (req, file, cb) {
+    cb(null, file.filename + '-' + Date.now() +
+        path.extname(file.originalname))
+  }
+})
+
+const upload = multer({ storage: storage })
 
 router.get('/', async (req, res) => {
   try {
@@ -24,10 +36,10 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', upload.single('image'), async (req, res) => {
   const { fullname, email, username, password } = req.body
   try {
-    const user = await controller.add(fullname, email, username, password)
+    const user = await controller.add(fullname, email, username, password, req.file)
     response.success(req, res, user, 201)
   } catch (error) {
     response.error(req, res, error.message, 400, error)
