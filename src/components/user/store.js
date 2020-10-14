@@ -41,11 +41,29 @@ const deleteUser = async (id) => {
   }
 }
 
+const getFavPost = async (id) => {
+  return new Promise((resolve, reject) => {
+    Model
+      .findById(id)
+      .populate({
+        path: 'favorite',
+        populate: { path: 'favorite' }
+      })
+      .exec((error, data) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(data)
+      })
+  })
+}
+
 module.exports = {
   add: addUser,
   getOneUser,
   getAllUsers,
   updateUser,
   deleteUser,
-  getOneByFilter
+  getOneByFilter,
+  getFavPost
 }

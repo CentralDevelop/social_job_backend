@@ -1,8 +1,10 @@
 const Model = require('../../storage/models/post')
+const userModel = require('../../storage/models/user')
+
 // const list = []
 
-const get = async (fCountry, fCity, fSkill) => {
-  let filter = {}
+const get = async (fCountry, fCity, fSkill, fPosition, fSalary) => {
+  filter = {}
 
   if (fCountry !== null) {
     filter = {
@@ -16,9 +18,22 @@ const get = async (fCountry, fCity, fSkill) => {
     filter = {
       skill: fSkill
     }
+  } else if (fPosition !== null) {
+    filter = {
+      position: fPosition
+    }
+  } else if (fSalary !== null) {
+    filter = {
+      salary: fSalary
+    }
   }
 
   const posts = await Model.find(filter)
+  return posts
+}
+
+const getFilter = async (id) => {
+  const posts = await Model.findOne({ _id: id })
   return posts
 }
 
@@ -26,7 +41,7 @@ const add = (post) => {
   // list.push(post)
   // console.log(list)
   const newPost = new Model(post)
-  newPost.save()
+  return newPost.save()
 }
 
 const update = async (id, post) => {
@@ -50,9 +65,28 @@ const remove = (id) => {
   })
 }
 
+const addFavorite = async (id, idUser) => {
+  const data = await userModel.findById(idUser)
+  data.favorite.push(id)
+  data.save()
+  userModel.update()
+}
+
+const deleteFavorite = async (id, idUser) => {
+  const data = await userModel.findById(idUser)
+  data.favorite.remove({
+    _id: id
+  })
+  data.save()
+  userModel.update()
+}
+
 module.exports = {
   add,
   get,
+  getFilter,
   update,
-  remove
+  remove,
+  addFavorite,
+  deleteFavorite
 }

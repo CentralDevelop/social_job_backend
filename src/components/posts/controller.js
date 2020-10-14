@@ -1,15 +1,20 @@
 const store = require('./store')
 
-const getAllPost = async (country, city, skill) => {
-  const result = await store.get(country, city, skill)
+const getAllPost = async (country, city, skill, position, salary) => {
+  const result = await store.get(country, city, skill, position, salary)
   return result
 }
 
-const addPost = (position, salary, rating, description, company, url, skill, user, country, city, image) => {
-  return new Promise((resolve, reject) => {
+const getPost = async (id) => {
+  const result = await store.getFilter(id)
+  return result
+}
+
+const addPost = async (position, salary, rating, description, company, url, skill, user, country, city, image) => {
+  try {
     if (!position || !salary || !rating || !description || !company || !url || !skill || !user || !country || !city) {
       console.log('[CONTROLLER] invalid data form')
-      reject('Missing data')
+      throw new Error('Missin Data')
     }
 
     let fileUrl = ''
@@ -30,15 +35,17 @@ const addPost = (position, salary, rating, description, company, url, skill, use
       country,
       city
     }
-    store.add(post)
+    const newPost = await store.add(post)
 
     finalResponse = {
-      post,
+      newPost,
       'System message': 'Post successfully created'
     }
 
-    resolve(finalResponse)
-  })
+    return (finalResponse)
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 const updatePost = (id, position, salary, rating, description, company, url, skill, user, country, city, image) => {
@@ -92,9 +99,30 @@ const deletePost = (id) => {
   })
 }
 
+const favoritePost = async (id, idUser) => {
+  if (!id || !idUser) {
+    throw new Error('falta informacion')
+  } else {
+    const data = await store.addFavorite(id, idUser)
+    return data
+  }
+}
+
+const deleteFavoritePost = async (id, idUser) => {
+  if (!id || !idUser) {
+    throw new Error('falta informacion')
+  } else {
+    const data = await store.deleteFavorite(id, idUser)
+    return data
+  }
+}
+
 module.exports = {
   addPost,
   getAllPost,
+  getPost,
   updatePost,
-  deletePost
+  deletePost,
+  favoritePost,
+  deleteFavoritePost
 }
