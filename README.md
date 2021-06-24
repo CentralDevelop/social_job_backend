@@ -1,4 +1,6 @@
 # Social Jobs
+![Headers](https://i.imgur.com/chIpLQ0.png)
+
 This is the best way to find several good jobs! :) based fully on people recomendations
 
 # getting started 🚀
